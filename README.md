@@ -44,4 +44,4 @@ In order to see effects of the caching with this server, network throttling in y
 
 Streaming can be hijacked to combine a cached HTML loading page with server responses. The response can be loaded in chunks with streams to display HTML as it loads. (HTML already does this normally and it is not prevented when using streams.)
 
-Loading `.js` files in the HTML (with `<script>` tags) is blocking. Using `async` (or `defer`) in the `<script>` tag allows it to be non-blocking and works as expected with streams. Putting `<script>` tags at the end of the HTML also prevents it from blocking HTML rendering (since it is loaded after the HTML is received). However, this doesn't allow the script to be loaded _while_ the HTML is being loaded and displayed.
+Loading `.js` files in the HTML (with `<script>` tags) is blocking. Using `async` in the `<script>` tag allows it to be non-blocking and works as expected with streams. Putting `<script>` tags at the end of the HTML also prevents it from blocking HTML rendering (since it is loaded after the HTML is received). However, this doesn't allow the script to be loaded _while_ the HTML is being loaded and displayed.

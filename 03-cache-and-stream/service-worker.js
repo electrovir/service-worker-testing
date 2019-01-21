@@ -24,13 +24,13 @@ self.addEventListener('fetch', (event) => {
                     var startFetch = caches.match(currentDirName).then(response => {
                         if (response !== undefined) {
                             // refresh the cache
-                            fetch(currentDirName).then(response => {
-                                let responseClone = response.clone();
+                            fetch(currentDirName).then(innerResponse => {
+                                let responseClone = innerResponse.clone();
 
                                 caches.open(currentDirName).then(cache => {
                                     cache.put(currentDirName, responseClone);
                                 });
-                                return response;
+                                return innerResponse;
                             }).catch(() => {
                                 console.error('Failed to fetch the thing');
                             });
