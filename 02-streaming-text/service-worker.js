@@ -13,8 +13,15 @@ self.addEventListener('fetch', event => {
 
     if (requestURL.pathname.endsWith("/")) {
         event.respondWith(
-            fetch('long.html').then(response => {
-                return replaceResponse(response, 4, /elit/ig, () => 'COW PIE DOG');
+            fetch('short.html').then(response => {
+                return replaceResponse(response, 4, /(<script\s+.*?\s*src=".+)?"/ig, (...args) => {
+                    console.log('dese are de argoomunts', args);
+                    if (args[1].indexOf('?') > -1) {
+                        return `${args[1]}&thing=cowpiedog"`
+                    } else {
+                        return `${args[1]}?thing=cowpiedog"`
+                    }
+                });
             })
         );
     }
@@ -45,6 +52,7 @@ function replaceResponse(response, bufferSize, match, replacer) {
                 let lastReplaceEnds = 0;
                 let replacedLengthDiff = 0;
                 bufferStr = bufferStr.replace(match, (...args) => {
+                    console.log(args);
                     const matched = args[0];
                     // offset is the offset in the original string, hence replacedLengthDiff
                     const offset = args[args.length - 2];
