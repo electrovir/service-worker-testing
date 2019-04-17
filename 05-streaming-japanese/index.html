@@ -1,0 +1,49 @@
+<html>
+    <head>
+        <title>Cached with Streaming</title>
+        <style>
+            html, body {
+                background-color: black;
+                height: 100%;
+                width: 100%;
+                padding: 0;
+                margin: 0;
+            }
+            #intro {
+                position: absolute;
+                font-size: 3em;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: 1;
+                opacity: 1;
+                background: url(background.png) black no-repeat center center fixed;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                color: #3CF;
+                font-family: sans-serif;
+                overflow: hidden;
+            }
+        </style>
+        <script>
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('service-worker.js', { scope: '/05-streaming-japanese/' })
+                .then(function (reg) {
+                    // registration worked
+                    console.info('Registration succeeded. Scope is ' + reg.scope);
+                }).catch(function (error) {
+                    // registration failed
+                    console.error('Registration failed with ' + error);
+                });
+            }
+        </script>
+    </head>
+    <body>
+        <div id="intro">
+            Refresh after service worker has been installed
+        </div>
+    </body>
+</html>
